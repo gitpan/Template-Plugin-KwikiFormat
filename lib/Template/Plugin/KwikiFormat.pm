@@ -2,14 +2,15 @@ package Template::Plugin::KwikiFormat;
 use strict;
 use warnings;
 use Kwiki;
+use Kwiki::Formatter;
 use base 'Template::Plugin';
 use vars qw($VERSION $FILTER_NAME);
 
-$VERSION = '1.00';
+$VERSION = '1.02';
 $FILTER_NAME = 'kwiki';
 
 sub new {
-    my($self, $context, @args) = @_;
+    my ($self, $context, @args) = @_;
     my $name = $args[0] || $FILTER_NAME;
     $context->define_filter($name, \&kwiki, 0);
     return $self;
@@ -24,8 +25,26 @@ sub kwiki {
     return $kwiki->formatter->text_to_html($text);
 }
 
-1;
 
+{
+    no warnings;
+
+    sub Kwiki::Formatter::ForcedLink::html {
+	my $self=shift;
+	return $self->matched
+    }
+    sub Kwiki::Formatter::WikiLink::html {
+	my $self=shift;
+	return $self->matched
+    }
+    sub Kwiki::Formatter::TitledWikiLink::html {
+	my $self=shift;
+	return $self->matched
+    }
+}
+
+
+1;
 
 __END__
 
@@ -60,6 +79,11 @@ See here:
 
 http://www.kwiki.org/?KwikiFormattingRules
 
+BUT:
+
+WikiLinks don't work without a kwiki, so we need some magic / dirty
+tricks to make it work (i.e.: subroutine redefinition at runtime)
+
 =head2 METHODS
 
 =head3 new
@@ -76,6 +100,8 @@ Thomas Klausner, domm@zsi.at, http://domm.zsi.at
 
 With a lot of thanks to Jon Åslund (Jooon) from #kwiki for coming up
 with how to do it.
+
+Additional thanks to Ian Langworth.
 
 =head1 COPYRIGHT
 

@@ -1,8 +1,35 @@
 #-----------------------------------------------------------------
 # Changes for Template::Plugin::KwikiFormat
-# $Rev: 10 $
-# $Date: 2004-10-22 12:47:04 +0200 (Fri, 22 Oct 2004) $ 
+# $Rev: 18 $
+# $Date: 2004-10-27 21:07:55 +0200 (Wed, 27 Oct 2004) $ 
 #-----------------------------------------------------------------
+
+
+
+
+2004-10-27		Template-Plugin-KwikiFormat-1.02
+----------
+* rewrote Template::Plugin::KwikiFormat to redefine some subs directly
+  in Kwiki::Formatter
+  everything works but my custom linking stuff (eg [/relative/link.html see here])
+* removed Template::Plugin::KwikiFormat::FakeKwiki as it doesn't work
+  with mod_perl, because something inside Kwiki uses CGI.pm in some
+  strange way...
+
+
+----------		Template-Plugin-KwikiFormat-1.01 (not released)
+
+* added Template::Plugin::KwikiFormat::FakeKwiki
+  to override various link-generating methods that do not work
+  outside of a kwiki installation.
+  additionally, change the behaviour of TitledHyperLink to allow for
+  relative links.
+  Thanks to Ian Langworth for pointing me into the right direction.
+
+* added t/30_links.t to test feature implemented by
+  Template::Plugin::KwikiFormat::FakeKwiki
+
+* added Test::NoWarnings to requires (thanks to Dave Cash for reporting this)
 
 
 2004-10-22		Template-Plugin-KwikiFormat-1.00 (first CPAN release)

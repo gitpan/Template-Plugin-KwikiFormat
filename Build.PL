@@ -10,6 +10,7 @@ my $build = Module::Build->new
    requires    => {
 		   'Template' => 2.07,
 		   'Kwiki'=>0.33,
+		   'Test::NoWarnings'=>0.07,
 		  },
    create_makefile_pl=>'passthrough',
 );
