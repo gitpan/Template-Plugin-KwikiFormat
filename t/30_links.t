@@ -32,7 +32,17 @@ forced [link]
 [%- END %]
 --expect--
 <p>
-forced [link]
+forced link
+</p>
+--test--
+[% USE KwikiFormat -%]
+[% FILTER kwiki -%]
+[/relative/link.html see here]
+
+[%- END %]
+--expect--
+<p>
+<a href="/relative/link.html">see here</a>
 </p>
 --test--
 [% USE KwikiFormat -%]

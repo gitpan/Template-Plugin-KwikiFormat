@@ -6,7 +6,7 @@ use Kwiki::Formatter;
 use base 'Template::Plugin';
 use vars qw($VERSION $FILTER_NAME);
 
-$VERSION = '1.02';
+$VERSION = '1.03';
 $FILTER_NAME = 'kwiki';
 
 sub new {
@@ -25,18 +25,39 @@ sub kwiki {
     return $kwiki->formatter->text_to_html($text);
 }
 
-
 {
     no warnings;
 
+    sub Kwiki::Formatter::ForcedLink::pattern_start {
+	return qr/\[([\w\s\/\.\-]+)\]/;
+    }
     sub Kwiki::Formatter::ForcedLink::html {
 	my $self=shift;
-	return $self->matched
+	my $text = $self->escape_html($self->matched);
+	$text=~s/\[|\]//g;
+	my @text=split(/\s+/,$text);
+	my ($target,@title);
+	foreach my $frag (@text) {
+	    if ($frag=~m{^\w+://}) {
+		$target=$frag;
+	    } elsif ($frag=~m{^/}) {
+		$target=$frag;
+	    } else {
+		push(@title,$frag);
+	    }
+	}
+	my $title=join(' ',@title);
+	return $title unless $target;
+
+	$title = $target unless $title =~ /\S/;
+	return qq(<a href="$target">$title</a>);
     }
+
     sub Kwiki::Formatter::WikiLink::html {
 	my $self=shift;
 	return $self->matched
     }
+
     sub Kwiki::Formatter::TitledWikiLink::html {
 	my $self=shift;
 	return $self->matched
@@ -83,6 +104,25 @@ BUT:
 
 WikiLinks don't work without a kwiki, so we need some magic / dirty
 tricks to make it work (i.e.: subroutine redefinition at runtime)
+
+ANOTHER BUT:
+
+I slightly altered the meaning of ForcedLinks. In Kwiki, something like this
+
+  [SomePage see here]
+
+results in a link to the Kwiki-Page "SomePage" labeld with "see here".
+
+With Template::Plugin::KwikiFormat, you can (ab)use this syntax for
+local (relative) links. i.e.:
+
+  [/some/page.html see here]
+
+gets rendered as a link to "/some/page.html" labled with "see here".
+
+One of the fragments inside the square bracktes needs to start with a
+slash for this to work.
+
 
 =head2 METHODS
 

@@ -1,10 +1,19 @@
 #-----------------------------------------------------------------
 # Changes for Template::Plugin::KwikiFormat
-# $Rev: 18 $
-# $Date: 2004-10-27 21:07:55 +0200 (Wed, 27 Oct 2004) $ 
+# $Rev: 25 $
+# $Date: 2004-11-04 15:32:19 +0100 (Thu, 04 Nov 2004) $ 
 #-----------------------------------------------------------------
 
 
+2004-11-04		Template-Plugin-KwikiFormat-1.03
+----------
+* documented ForcedLink
+
+
+2004-10-28
+----------
+* figured out how to change the const pattern_start regex
+  relative links in ForcedLink work now! yay!
 
 
 2004-10-27		Template-Plugin-KwikiFormat-1.02

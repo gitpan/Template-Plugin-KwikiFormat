@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name: Template-Plugin-KwikiFormat
-version: 1.02
+version: 1.03
 author:
   - Thomas Klausner, domm@zsi.at, http://domm.zsi.at
   - |-
@@ -16,5 +16,5 @@ requires:
 provides:
   Template::Plugin::KwikiFormat:
     file: lib/Template/Plugin/KwikiFormat.pm
-    version: 1.02
+    version: 1.03
 generated_by: Module::Build version 0.25
