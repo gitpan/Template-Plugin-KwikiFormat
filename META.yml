@@ -1,0 +1,18 @@
+--- #YAML:1.0
+name: Template-Plugin-KwikiFormat
+version: 1.00
+author:
+  - Thomas Klausner, domm@zsi.at, http://domm.zsi.at
+  - |-
+    With a lot of thanks to Jon Åslund (Jooon) from #kwiki for coming up
+    with how to do it.
+abstract: filter to convert kwiki formatted text to html
+license: perl
+requires:
+  Kwiki: 0.33
+  Template: 2.07
+provides:
+  Template::Plugin::KwikiFormat:
+    file: lib/Template/Plugin/KwikiFormat.pm
+    version: 1.00
+generated_by: Module::Build version 0.25

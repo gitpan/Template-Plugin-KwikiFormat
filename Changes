@@ -1,0 +1,17 @@
+#-----------------------------------------------------------------
+# Changes for Template::Plugin::KwikiFormat
+# $Rev: 10 $
+# $Date: 2004-10-22 12:47:04 +0200 (Fri, 22 Oct 2004) $ 
+#-----------------------------------------------------------------
+
+
+2004-10-22		Template-Plugin-KwikiFormat-1.00 (first CPAN release)
+----------
+* improved docs a bit
+* bumped $VERSION to 1.00
+* added t/20_table.t test to test table generation
+
+
+2004-10-21
+----------
+* initial version.
