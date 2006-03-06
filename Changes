@@ -1,8 +1,14 @@
 #-----------------------------------------------------------------
 # Changes for Template::Plugin::KwikiFormat
-# $Rev: 25 $
-# $Date: 2004-11-04 15:32:19 +0100 (Thu, 04 Nov 2004) $ 
+# $Rev: 97 $
+# $Date: 2006-03-06 16:55:38 +0000 (Mon, 06 Mar 2006) $ 
 #-----------------------------------------------------------------
+
+
+2006-03-07		Template-Plugin-KwikiFormat-1.04
+----------
+* supported Kwiki 0.38
+* Satoshi Tanimoto now takes over the module from Thomas Klausner.
 
 
 2004-11-04		Template-Plugin-KwikiFormat-1.03

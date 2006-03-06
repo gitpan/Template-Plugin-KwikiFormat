@@ -11,3 +11,4 @@ t/30_links.t
 t/99_pod.t
 t/99_pod_coverage.t
 TODO
+Makefile.PL

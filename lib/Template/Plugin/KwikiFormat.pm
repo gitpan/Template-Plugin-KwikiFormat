@@ -6,7 +6,7 @@ use Kwiki::Formatter;
 use base 'Template::Plugin';
 use vars qw($VERSION $FILTER_NAME);
 
-$VERSION = '1.03';
+$VERSION = '1.04';
 $FILTER_NAME = 'kwiki';
 
 sub new {
@@ -16,13 +16,23 @@ sub new {
     return $self;
 }
 
-my $kwiki = Kwiki->new;
-$kwiki->load_hub({formatter_class => 'Kwiki::Formatter' });
-$kwiki->use_class('formatter');
+use constant USE_CLASS_COMPLIENT => Kwiki->VERSION < 0.38;
+
+my $kwiki;
+if (USE_CLASS_COMPLIENT) {
+    $kwiki = Kwiki->new;
+    $kwiki->load_hub({formatter_class => 'Kwiki::Formatter' });
+    $kwiki->use_class('formatter');
+}
+else {
+    $kwiki = Kwiki::Formatter->new;
+}
 
 sub kwiki {
     my $text=shift;
-    return $kwiki->formatter->text_to_html($text);
+    return USE_CLASS_COMPLIENT
+        ? $kwiki->formatter->text_to_html($text)
+        : $kwiki->text_to_html($text);
 }
 
 {
@@ -142,6 +152,9 @@ With a lot of thanks to Jon Åslund (Jooon) from #kwiki for coming up
 with how to do it.
 
 Additional thanks to Ian Langworth.
+
+From March 2006, this module is taken over and maintained by Satoshi
+Tanimoto E<lt>tanimoto@cpan.orgE<gt>
 
 =head1 COPYRIGHT
 
